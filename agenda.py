@@ -22,8 +22,8 @@ while True:
     print("3. Editar contato: ")
     print("4. Adicionar contato aos favoritos: ")
     print("5. Ver lista de favoritos: ")
-    print("5. Excluir contato: ")
-    print("6. Sair")
+    print("6. Excluir contato: ")
+    print("7. Sair")
 
 
     escolha = input("Digite sua escolha: ")
@@ -37,7 +37,7 @@ while True:
     elif escolha == "2":
         visualizar_contato(lista)
     
-    elif escolha == "6":
+    elif escolha == "7":
         break
 
 print("Agenda finalizada com sucesso")
