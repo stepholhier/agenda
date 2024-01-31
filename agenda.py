@@ -6,14 +6,57 @@ def adicionar_contato(nome, email, telefone):
 
 
 def visualizar_contato(lista):
+    if not lista: 
+        print("Não há contatos para exibir.")
+        return
     print("\nLista de Contatos: ")
-    for indice, dados in enumerate(lista, start=1):
-        status = "❤️" if dados["completada"] else " "
-        contato = dados["nome"]
-        print(f"{indice}. [{status}] {contato}")
+    for indice, contato in enumerate(lista, start=1):
+        status = "❤️" if contato["completada"] else " " 
+        nome = contato["nome"]
+        email = contato["email"]
+        telefone = contato["telefone"]
+        print(f"{indice}. [{status}] Nome: {nome}, E-mail: {email}, Telefone: {telefone}")
 
-#Adicionando editar contato
-# def editar_contato(lista):
+
+def editar_contato(lista, indice_contato, novo_nome, novo_email, novo_telefone):
+    indice_contato_atualizado = int(indice_contato) - 1
+    if 0 <= indice_contato_atualizado < len(lista):
+        contato_atualizado = lista[indice_contato_atualizado]
+        contato_atualizado["nome"] = novo_nome
+        contato_atualizado["email"] = novo_email
+        contato_atualizado["telefone"] = novo_telefone
+        print(f"Contato {indice_contato} foi atualizado com sucesso.")
+    else:
+        print("Índice de contato é inválido.")
+    return
+
+def contato_favorito(lista, indice_contato):
+    indice_contato_atualizado = int(indice_contato) -1
+    lista[indice_contato_atualizado] ["completada"] = True
+    print(f"Contato{indice_contato} marcado como favorito")
+    return 
+
+def lista_favoritos(lista):
+    if not lista: 
+        print("Não há contatos favoritos.")
+        return
+    print("\nLista de Favoritos: ")
+    for indice, contato in enumerate(lista, start=1):
+        if contato["completada"]:  
+            status = "❤️"
+            nome = contato["nome"]
+            email = contato["email"]
+            telefone = contato["telefone"]
+            print(f"{indice}. [{status}] Nome: {nome}, E-mail: {email}, Telefone: {telefone}")
+
+def deletar_contato(lista, indice_contato):
+    indice_contato_para_deletar = int(indice_contato) - 1
+    if 0 <= indice_contato_para_deletar < len(lista):
+        del lista[indice_contato_para_deletar]
+        print(f"Contato {indice_contato} deletado com sucesso.")
+    else:
+        print("Índice de contato é inválido.")
+    return
 
 lista = []
 while True:
@@ -36,7 +79,32 @@ while True:
 
     elif escolha == "2":
         visualizar_contato(lista)
+
     
+    elif escolha == "3":
+        visualizar_contato(lista)
+        indice_contato = input("Digite o número do contato que deseja atualizar: ")
+        novo_nome = input("Digite o novo nome do contato: ")
+        novo_email = input("Digite o novo e-mail do contato: ")
+        novo_telefone = input("Digite o novo telefone do contato: ")
+        editar_contato(lista, indice_contato, novo_nome, novo_email, novo_telefone)
+
+    elif escolha == "4":
+        visualizar_contato(lista)
+        indice_contato = input("Digite o contato que deseja favoritar: ")
+        contato_favorito(lista, indice_contato)
+    
+
+    elif escolha == "5":
+        lista_favoritos(lista)
+
+
+    elif escolha == "6":
+        visualizar_contato(lista)
+        indice_contato = input("Digite o número do contato que deseja excluir: ")
+        deletar_contato(lista, indice_contato)
+        visualizar_contato(lista)
+
     elif escolha == "7":
         break
 
